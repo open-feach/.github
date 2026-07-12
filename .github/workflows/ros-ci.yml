@@ -1,0 +1,77 @@
+name: ROS CI
+
+# Reusable CI for Open Feach ROS 2 package repositories.
+#
+# Package repos call this from a one-line workflow (see templates/ci.yml).
+# Maintaining CI logic here means distro bumps and tool swaps happen in ONE place
+# for the whole organization.
+
+on:
+  workflow_call:
+    inputs:
+      distros:
+        description: >-
+          JSON array of ROS 2 distros to build & test, e.g. '["rolling"]'.
+          Leave empty to infer the distro from the branch name
+          (rolling / jazzy / lyrical), which is the org default.
+        type: string
+        required: false
+        default: ''
+      ref:
+        description: >-
+          Git ref to check out. Leave empty to use the ref that triggered the
+          caller (normal push / pull_request runs). Set explicitly for the
+          scheduled sweep, where one run tests a different branch than its own.
+        type: string
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  # Resolve which distros to run. When the caller does not pass `distros`,
+  # fall back to the branch name (base_ref on PRs, ref_name on push/schedule),
+  # so a per-branch caller needs no arguments at all.
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      distros: ${{ steps.resolve.outputs.distros }}
+    steps:
+      - id: resolve
+        shell: bash
+        env:
+          INPUT_DISTROS: ${{ inputs.distros }}
+          BASE_REF: ${{ github.base_ref }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ -n "${INPUT_DISTROS}" ]; then
+            distros="${INPUT_DISTROS}"
+          else
+            branch="${BASE_REF:-${REF_NAME}}"
+            distros="[\"${branch}\"]"
+          fi
+          echo "Resolved distros: ${distros}"
+          echo "distros=${distros}" >> "${GITHUB_OUTPUT}"
+
+  ci:
+    needs: prepare
+    name: ${{ matrix.distro }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro: ${{ fromJSON(needs.prepare.outputs.distros) }}
+    env:
+      ROS_DISTRO: ${{ matrix.distro }}
+      ROS_REPO: main
+    steps:
+      - name: Check out ${{ inputs.ref || github.ref_name }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+      # industrial_ci pinned to a commit SHA for supply-chain safety.
+      # Bump deliberately; do not float on @master.
+      - name: Run industrial_ci
+        uses: ros-industrial/industrial_ci@125164b9f1883cdf1858897a7146d1bebf2be5c6

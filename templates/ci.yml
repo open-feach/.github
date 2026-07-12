@@ -1,0 +1,26 @@
+# Per-branch CI for an Open Feach ROS 2 package repository.
+# Copy this file to `.github/workflows/ci.yml` in the package repo.
+#
+# Runs on push and pull_request to each distro branch and tests that branch
+# against ITS OWN distro — the distro is inferred from the branch name by the
+# reusable workflow, so there is nothing to configure per repo.
+
+name: CI
+
+on:
+  push:
+    branches: [rolling, jazzy, lyrical]
+  pull_request:
+    branches: [rolling, jazzy, lyrical]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    uses: open-feach/.github/.github/workflows/ros-ci.yml@main
+    # `distros` intentionally omitted -> inferred from the branch
+    # (rolling / jazzy / lyrical). Override only to test extra distros, e.g.:
+    #   with:
+    #     distros: '["rolling","jazzy"]'

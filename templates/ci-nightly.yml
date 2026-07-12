@@ -1,0 +1,28 @@
+# Weekly scheduled CI for an Open Feach ROS 2 package repository.
+# Copy this file to `.github/workflows/ci-nightly.yml` in the package repo.
+#
+# WHY THIS IS ONE WORKFLOW AND NOT A `schedule:` ON EACH BRANCH:
+# GitHub only runs `schedule:` triggers on a repository's DEFAULT branch
+# (rolling). A per-branch `on: schedule` would therefore only ever fire on
+# rolling, silently leaving jazzy and lyrical untested. So instead, this single
+# scheduled workflow fans out over every distro branch and tests each one
+# against its matching distro. This catches upstream/dependency breakage on the
+# LTS branches even when no one has pushed to them.
+
+name: CI (nightly)
+
+on:
+  schedule:
+    - cron: '17 4 * * 1'   # 04:17 UTC every Monday
+  workflow_dispatch: {}      # allow manual runs
+
+jobs:
+  sweep:
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: [rolling, jazzy, lyrical]
+    uses: open-feach/.github/.github/workflows/ros-ci.yml@main
+    with:
+      ref: ${{ matrix.branch }}
+      distros: '["${{ matrix.branch }}"]'
