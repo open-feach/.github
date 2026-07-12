@@ -65,7 +65,10 @@ jobs:
         distro: ${{ fromJSON(needs.prepare.outputs.distros) }}
     env:
       ROS_DISTRO: ${{ matrix.distro }}
-      ROS_REPO: main
+      # Rolling's debs for the current Ubuntu land in ros2-testing before they
+      # are synced to the main repo (e.g. during a platform bump), so build
+      # rolling against testing. Released distros stay on main.
+      ROS_REPO: ${{ matrix.distro == 'rolling' && 'testing' || 'main' }}
     steps:
       - name: Check out ${{ inputs.ref || github.ref_name }}
         uses: actions/checkout@v4
