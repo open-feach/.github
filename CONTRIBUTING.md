@@ -23,7 +23,7 @@ We target these distributions. Each has its own long-lived branch in every packa
 |--------|------|--------|-------|
 | **Rolling** Ridley | rolling | `rolling` | Development branch — all new work lands here first |
 | **Jazzy** Jalisco | LTS | `jazzy` | Backport target |
-| **Humble** Hawksbill | LTS | `humble` | Backport target |
+| **Lyrical** Luth | LTS | `lyrical` | Backport target |
 
 > The `open-feach/.github` repository (this one) is org infrastructure, not a ROS package,
 > so it keeps `main` as its default branch. The model below applies to **package repositories**.
@@ -39,12 +39,12 @@ We follow the same model as ROS 2 core and Nav2.
                                  │  cherry-pick / backport (downward only)
                      ┌───────────┴───────────┐
                      ▼                       ▼
-                  jazzy                    humble
+                  jazzy                   lyrical
 ```
 
 - **`rolling` is the one and only development branch.** All new features and fixes are
   merged here first via pull request.
-- **Distro branches (`jazzy`, `humble`) receive backports** of applicable fixes, cherry-picked
+- **Distro branches (`jazzy`, `lyrical`) receive backports** of applicable fixes, cherry-picked
   down from `rolling`. Never develop directly on a distro branch.
 - **No upward merges.** Changes flow `rolling` → distro, never the reverse.
 - **Distro branches stay API/ABI stable.** Breaking changes are allowed on `rolling` only.
@@ -63,7 +63,7 @@ We follow the same model as ROS 2 core and Nav2.
 3. **Open a pull request against `rolling`.** Fill in the PR template and keep the PR focused.
 4. **Request a backport** by adding a label to the PR when the fix should reach a distro:
    - `backport-jazzy`
-   - `backport-humble`
+   - `backport-lyrical`
 
    After the PR merges, a backport PR is opened automatically (or by a maintainer) against
    that distro branch. If the cherry-pick conflicts, you may be asked to resolve it.

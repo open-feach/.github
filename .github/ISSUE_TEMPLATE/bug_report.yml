@@ -31,8 +31,8 @@ body:
       label: ROS 2 distribution
       options:
         - Rolling
+        - Lyrical
         - Jazzy
-        - Humble
     validations:
       required: true
   - type: input

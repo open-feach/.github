@@ -35,7 +35,7 @@ body:
       multiple: true
       options:
         - Rolling
+        - Lyrical
         - Jazzy
-        - Humble
     validations:
       required: false

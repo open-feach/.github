@@ -26,7 +26,7 @@ See the full guide: https://github.com/open-feach/.github/blob/main/CONTRIBUTING
 
 - [ ] No backport needed
 - [ ] Add label `backport-jazzy`
-- [ ] Add label `backport-humble`
+- [ ] Add label `backport-lyrical`
 
 ## Checklist
 
