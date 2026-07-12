@@ -1,0 +1,19 @@
+# <type>(<scope>): <short summary, imperative, ≤ 50 chars>
+#
+# <body — what & why, wrap at ~72 chars. "How" is in the code.>
+#
+# <footer — e.g. "Closes #123", "BREAKING CHANGE: ...">
+#
+# Signed-off-by: Your Name <you@example.com>   ← added automatically by `git commit -s`
+#
+# ── Conventional Commits ────────────────────────────────────────────
+#   type:  feat | fix | docs | refactor | test | build | ci | chore
+#   scope: optional, e.g. (costmap), (controller)
+#
+#   examples:
+#     fix(costmap): clamp inflation radius to map resolution
+#     feat(controller): add configurable goal tolerance
+#     docs: explain rolling→distro backport flow
+#
+# Remember: sign off every commit  →  git commit -s
+# Full guide: CONTRIBUTING.md

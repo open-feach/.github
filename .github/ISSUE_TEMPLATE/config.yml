@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Questions & ideas / 질문·아이디어
+    url: https://github.com/orgs/open-feach/discussions
+    about: For usage questions and open-ended ideas, please use Discussions instead of Issues.
+  - name: 📬 Contact the team / 팀 문의
+    url: mailto:openfeach@googlegroups.com
+    about: Reach the Open Feach team by email.
