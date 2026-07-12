@@ -23,7 +23,7 @@
 |--------|------|--------|------|
 | **Rolling** Ridley | rolling | `rolling` | 개발 브랜치. 새 작업은 모두 여기로 먼저 들어옵니다 |
 | **Jazzy** Jalisco | LTS | `jazzy` | 백포트 대상 |
-| **Humble** Hawksbill | LTS | `humble` | 백포트 대상 |
+| **Lyrical** Luth | LTS | `lyrical` | 백포트 대상 |
 
 > 지금 이 `open-feach/.github` 저장소는 ROS 패키지가 아니라 조직 공통 설정을 담는
 > 저장소라서 기본 브랜치를 `main`으로 둡니다. 아래 브랜치 전략은 **패키지 저장소**를
@@ -40,12 +40,12 @@ ROS 2 코어, Nav2와 같은 방식을 씁니다.
                                   │  cherry-pick / 백포트 (아래 방향으로만)
                       ┌───────────┴───────────┐
                       ▼                       ▼
-                   jazzy                    humble
+                   jazzy                   lyrical
 ```
 
 - **개발은 오직 `rolling`에서만 합니다.** 새 기능이든 수정이든 PR을 거쳐 이 브랜치에
   먼저 반영됩니다.
-- **`jazzy`, `humble` 같은 distro 브랜치에는 백포트만 들어갑니다.** `rolling`에서
+- **`jazzy`, `lyrical` 같은 distro 브랜치에는 백포트만 들어갑니다.** `rolling`에서
   cherry-pick으로 내려보내며, distro 브랜치에서 직접 개발하지 않습니다.
 - **위로 거슬러 올리는 머지는 하지 않습니다.** 변경은 항상 `rolling`에서 distro
   방향으로만 흐릅니다.
@@ -68,7 +68,7 @@ ROS 2 코어, Nav2와 같은 방식을 씁니다.
    주제만 담아 주세요.
 4. distro까지 반영해야 하는 수정이라면 PR에 **백포트 라벨**을 붙이세요.
    - `backport-jazzy`
-   - `backport-humble`
+   - `backport-lyrical`
 
    PR이 머지되면 해당 distro 브랜치로 백포트 PR이 자동으로(또는 메인테이너가)
    생성됩니다. cherry-pick 도중 충돌이 나면 직접 해결을 부탁드릴 수 있습니다.
