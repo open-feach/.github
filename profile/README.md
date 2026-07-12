@@ -7,27 +7,28 @@
 
 ### Robotics within reach.
 
-📖 **English** · [한국어](README.ko.md)
+**English** · [한국어](README.ko.md)
 
 </div>
 
 ---
 
-Open Feach Robotics is an open-source organization dedicated to mobile robotics. We build
-in the open and release our work freely, so that creating, studying, and improving robots
-is within reach of **anyone** — not locked behind expensive kits or closed, proprietary
-systems.
+Open Feach Robotics is an open-source organization devoted to mobile robotics. We develop
+in the open and release our work freely — so that building, studying, and improving robots
+is within reach of **anyone**, rather than gated behind costly kits or closed, proprietary
+stacks.
 
-We believe robotics moves faster when its foundations are shared. So we keep ours open,
-free to use, inspect, and build upon.
+We believe robotics advances fastest when its foundations are shared. So we keep ours open:
+free to use, to study, and to build upon.
 
-**What we stand for:**
+**What we stand for**
 
-- 🔓 **Open by default** — everything we build is public and free to use.
+- 🔓 **Open by default** — everything we make is public and free to use.
 - 🌍 **For everyone** — robotics that isn't reserved for labs and large budgets.
-- 🤝 **Built together** — developed in the open, with the community.
+- 🤝 **Built together** — developed in the open, alongside the community.
 
 <div align="center">
+<br/>
 
 📬 **[openfeach@googlegroups.com](mailto:openfeach@googlegroups.com)**
 
